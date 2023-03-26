@@ -4,7 +4,7 @@ import React from 'react';
 
 export default class App extends React.Component {
 
-  state = {}
+  state = { amount: 0, discount: 0, result: 0 }
 
   render() {
     return (
@@ -35,7 +35,7 @@ export default class App extends React.Component {
         <Text style={styles.resultText}>
           The Amount after Discount is: </Text>
         <Text style={styles.resultText}>
-          {this.state.result ? this.state.amount - this.state.result : '- -'}</Text>
+          {this.state.amount - this.state.result}</Text>
       </SafeAreaView>
     );
   }
