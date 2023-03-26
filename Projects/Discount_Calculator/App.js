@@ -6,6 +6,10 @@ export default class App extends React.Component {
 
   state = { amount: 0, discount: 0, result: 0 }
 
+  onAmountChange = (text) => { this.setState({ amount: text }) };
+  onDiscountChange = (text) => { this.setState({ discount: text }) };
+  onPressCalculate = () => this.setState({ result: this.state.amount * (this.state.discount / 100) });
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -14,29 +18,29 @@ export default class App extends React.Component {
         </Text>
         <View style={{ marginHorizontal: 40, marginTop: 40, marginBottom: 20 }}>
           <Text style={{ marginBottom: 20 }}>Amount</Text>
-          <TextInput style={styles.input} onChangeText={(text) => { this.setState({ amount: text }) }} />
+          <TextInput style={styles.input} onChangeText={this.onAmountChange} />
         </View>
 
         <View style={{ marginHorizontal: 40 }}>
           <Text style={{ marginBottom: 20 }}>Discount(%)</Text>
-          <TextInput style={styles.input} onChangeText={(text) => { this.setState({ discount: text }) }} />
+          <TextInput style={styles.input} onChangeText={this.onDiscountChange} />
         </View>
         <StatusBar style="auto" />
 
         <View style={{ alignItems: 'center' }}>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() => this.setState({ result: this.state.amount * (this.state.discount / 100) })}
+            onPress={this.onPressCalculate}
           >
             <Text style={{ color: 'white' }}>Calculate</Text>
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.resultText}>
+        <Text style={[styles.resultText, { color: this.state.result > 0 ? 'green' : 'black' }]}>
           The Amount after Discount is: </Text>
-        <Text style={styles.resultText}>
+        <Text style={[styles.resultText, { color: this.state.result > 0 ? 'green' : 'black' }]}>
           {this.state.amount - this.state.result}</Text>
-      </SafeAreaView>
+      </SafeAreaView >
     );
   }
 };
@@ -68,7 +72,6 @@ const styles = StyleSheet.create({
   },
 
   resultText: {
-    color: 'green',
     textAlign: 'center',
     fontSize: 22,
     marginTop: 20
