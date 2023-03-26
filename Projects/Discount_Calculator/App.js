@@ -35,7 +35,7 @@ export default class App extends React.Component {
         <Text style={styles.resultText}>
           The Amount after Discount is: </Text>
         <Text style={styles.resultText}>
-          {this.state.amount - this.state.result}</Text>
+          {this.state.result ? this.state.amount - this.state.result : '- -'}</Text>
       </SafeAreaView>
     );
   }
