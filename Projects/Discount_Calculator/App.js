@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import React from 'react';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 export default class App extends React.Component {
 
@@ -40,6 +42,8 @@ export default class App extends React.Component {
           The Amount after Discount is: </Text>
         <Text style={[styles.resultText, { color: this.state.result ? 'green' : 'black' }]}>
           {this.state.result ? this.state.amount - this.state.result : null}</Text>
+        <Ionicons name="md-checkmark-circle" size={32} color="green" />
+
       </SafeAreaView >
     );
   }
