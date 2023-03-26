@@ -2,36 +2,17 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
-
-  const [enteredGoalText, setEnteredGoalText] = useState('');
-  
-  function goalInputHandler(enteredText) {
-    //console.log(enteredText);
-    setEnteredGoalText(enteredText);
-  };
-
-  function addGoalHandler() {
-    console.log(enteredGoalText);
-  };
-
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput  placeholder='Your course goals!!' 
-                    style={styles.textInput}
-                    onChangeText={goalInputHandler}>
-                    
-        </TextInput>
-        <Button title='Add Goal'
-                onPress={addGoalHandler }
-        />
-      </View>
-      <View>
-        <View style={styles.goalsContainer}>
-          <Text>List of Goals</Text>
+
+      <View style={styles.container_two}>
+        <View style={styles.view1Style}>
+          <Text>Text-1</Text>
+        </View>
+        <View style={styles.view2Style}>
+          <Text>Text-2</Text>
         </View>
       </View>
-      
 
     </View>
   );
@@ -39,10 +20,37 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    //flex: 1,
-    paddingTop:50,
-    paddingHorizontal:16
+    paddingTop: 50,
+    paddingHorizontal: 16
   },
+
+  container_two: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+
+  view1Style: {
+    flex: 1,
+    backgroundColor: 'yellow',
+    width: 80,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+
+
+
+  },
+  view2Style: {
+    flex: 1,
+    backgroundColor: 'orange',
+    width: 80,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+
+
+  /*
   inputContainer: {
     //flex: 0.1,
     flexDirection: 'row',
@@ -53,7 +61,7 @@ const styles = StyleSheet.create({
     //borderBottomColor: '#CCCCCC'
 
   },
-  textInput:{
+  textInput: {
     borderWidth: 1,
     borderColor: '#CCCCCC',
     width: '70%',
@@ -61,9 +69,11 @@ const styles = StyleSheet.create({
     padding: 8
 
   },
-  goalsContainer:{
-   // flex: 0.5
-   marginTop: 4
-  }
-  
+  goalsContainer: {
+    // flex: 0.5
+    marginTop: 4
+  }*/
+
+
+
 });
