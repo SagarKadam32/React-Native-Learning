@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView } from 'react-native';
 import { useState } from 'react';
-import Avatar from './function';
 
 export default function App() {
   return (
@@ -15,7 +14,6 @@ export default function App() {
         </View>
 
       </View>
-      <Avatar />
       <View style={styles.detailsContainer}>
         <View style={styles.item}>
           <Text style={styles.label}>Name:</Text>
