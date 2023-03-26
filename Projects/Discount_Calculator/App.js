@@ -4,6 +4,8 @@ import React from 'react';
 
 export default class App extends React.Component {
 
+  state = {}
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -12,17 +14,20 @@ export default class App extends React.Component {
         </Text>
         <View style={{ marginHorizontal: 40, marginTop: 40, marginBottom: 20 }}>
           <Text style={{ marginBottom: 20 }}>Amount</Text>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={(text) => { this.setState({ amount: text }) }} />
         </View>
 
         <View style={{ marginHorizontal: 40 }}>
           <Text style={{ marginBottom: 20 }}>Discount(%)</Text>
-          <TextInput style={styles.input} />
+          <TextInput style={styles.input} onChangeText={(text) => { this.setState({ discount: text }) }} />
         </View>
         <StatusBar style="auto" />
 
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity style={styles.buttonStyle}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => this.setState({ result: this.state.amount * (this.state.discount / 100) })}
+          >
             <Text style={{ color: 'white' }}>Calculate</Text>
           </TouchableOpacity>
         </View>
@@ -30,7 +35,7 @@ export default class App extends React.Component {
         <Text style={styles.resultText}>
           The Amount after Discount is: </Text>
         <Text style={styles.resultText}>
-          20</Text>
+          {this.state.result}</Text>
       </SafeAreaView>
     );
   }
