@@ -1,36 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react';
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={{ alignItems: 'center', marginTop: 40 }}>
-        <Text style={{ fontSize: 22 }}>Discount Calculator</Text>
-      </Text>
-      <View style={{ marginHorizontal: 40, marginTop: 40, marginBottom: 20 }}>
-        <Text style={{ marginBottom: 20 }}>Amount</Text>
-        <TextInput style={styles.input} />
-      </View>
+export default class App extends React.Component {
 
-      <View style={{ marginHorizontal: 40 }}>
-        <Text style={{ marginBottom: 20 }}>Discount(%)</Text>
-        <TextInput style={styles.input} />
-      </View>
-      <StatusBar style="auto" />
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={{ alignItems: 'center', marginTop: 40 }}>
+          <Text style={{ fontSize: 22 }}>Discount Calculator</Text>
+        </Text>
+        <View style={{ marginHorizontal: 40, marginTop: 40, marginBottom: 20 }}>
+          <Text style={{ marginBottom: 20 }}>Amount</Text>
+          <TextInput style={styles.input} />
+        </View>
 
-      <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity style={styles.buttonStyle}>
-          <Text style={{ color: 'white' }}>Calculate</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={{ marginHorizontal: 40 }}>
+          <Text style={{ marginBottom: 20 }}>Discount(%)</Text>
+          <TextInput style={styles.input} />
+        </View>
+        <StatusBar style="auto" />
 
-      <Text style={styles.resultText}>
-        The Amount after Discount is: </Text>
-      <Text style={styles.resultText}>
-        20</Text>
-    </SafeAreaView>
-  );
-}
+        <View style={{ alignItems: 'center' }}>
+          <TouchableOpacity style={styles.buttonStyle}>
+            <Text style={{ color: 'white' }}>Calculate</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.resultText}>
+          The Amount after Discount is: </Text>
+        <Text style={styles.resultText}>
+          20</Text>
+      </SafeAreaView>
+    );
+  }
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 16
   },
 
   buttonStyle: {
