@@ -36,9 +36,9 @@ export default class App extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <Text style={[styles.resultText, { color: this.state.result > 0 ? 'green' : 'black' }]}>
+        <Text style={[styles.resultText, { color: this.state.result ? 'green' : 'black' }]}>
           The Amount after Discount is: </Text>
-        <Text style={[styles.resultText, { color: this.state.result > 0 ? 'green' : 'black' }]}>
+        <Text style={[styles.resultText, { color: this.state.result ? 'green' : 'black' }]}>
           {this.state.amount - this.state.result}</Text>
       </SafeAreaView >
     );
