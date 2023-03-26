@@ -4,6 +4,7 @@ import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
+
 export default class App extends React.Component {
 
   state = { amount: 0, discount: 0, result: 0 }
