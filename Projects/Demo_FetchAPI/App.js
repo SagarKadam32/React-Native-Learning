@@ -1,15 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import React from 'react';
 
 class App extends React.Component {
 
+  state = { body: [] }
+
   componentDidMount() {
     /** Basic Fetch API JS Call */
-    this.fetchRequest();
+    //this.fetchRequest();
 
     /** Async Await Fetch API Call */
-    //this.fetchRequestUsingAysnc();
+    this.fetchRequestUsingAysnc();
   }
 
   /** Basic Fetch API JS Call */
@@ -23,23 +25,36 @@ class App extends React.Component {
 
   /** Async Await Fetch API Call */
   fetchRequestUsingAysnc = async () => {
-    const api = 'https://jsonplaceholder.typicode.com/todos/1'
+    const api = 'https://jsonplaceholder.typicode.com/posts';
 
     const response = await fetch(api);
     const body = await response.json();
     console.log(body);
 
+    this.setState({ body });
+
   }
-
-
-
 
   render() {
     return (
-      <View style={styles.container} >
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          {this.state.body.map((el) => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: 10,
+              }}
+              key={el.id}
+            >
+              <Text style={{ flex: 1, width: 100 }}>Title : {el.title}</Text>
+              <Text >Body : {el.body}</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }
