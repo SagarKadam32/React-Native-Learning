@@ -4,18 +4,35 @@ import React from 'react';
 
 class App extends React.Component {
 
-  componentDidUpdate() {
+  componentDidMount() {
+    /** Basic Fetch API JS Call */
     this.fetchRequest();
+
+    /** Async Await Fetch API Call */
+    //this.fetchRequestUsingAysnc();
   }
 
+  /** Basic Fetch API JS Call */
   fetchRequest = () => {
-    const api = 'https://api.themoviedb.org/3/movie/popular?api_key=33c2b018c41ac61aa087e57644ba423b&language=en-US&page=1';
-    //const res = fetch(api);
+    const api = 'https://jsonplaceholder.typicode.com/todos/1'
     fetch(api)
       .then((response) =>
         response.json().then((data) => console.log(data)))
       .catch((err) => { console.log(err) });
   };
+
+  /** Async Await Fetch API Call */
+  fetchRequestUsingAysnc = async () => {
+    const api = 'https://jsonplaceholder.typicode.com/todos/1'
+
+    const response = await fetch(api);
+    const body = await response.json();
+    console.log(body);
+
+  }
+
+
+
 
   render() {
     return (
