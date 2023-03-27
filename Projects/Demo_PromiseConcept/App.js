@@ -12,7 +12,7 @@ export default function App() {
   const dataProviderPromise = new Promise((resolve, reject) => {
     let noIssues = true;
     if (noIssues) {
-      resolve(data);
+      setTimeout(() => resolve(data), 3000)
     } else {
       reject('Error Inside the promise.')
     }
