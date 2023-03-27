@@ -1,43 +1,67 @@
-import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import React from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-
-export default function Card({ image, liked }) {
+const Card = ({ image, liked, onLike, id }) => {
     return (
         <View style={styles.card}>
-            <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Image
-                    source={image}
-                    style={{ width: 260, height: 180, resizeMode: 'contain', borderRadius: 20 }}
-                />
+            <View
+                style={{ justifyContent: 'center', alignItems: 'center' }}
+            >
+                <TouchableWithoutFeedback onLongPress={() => onLike(id)}>
+                    <Image
+                        source={image}
+                        style={{
+                            width: 260,
+                            height: 180,
+                            resizeMode: 'contain',
+                            borderRadius: 20,
+                        }}
+                    />
+                </TouchableWithoutFeedback>
             </View>
             <View style={styles.footer}>
-                <Text style={[{ flex: 1 }, styles.actionButton]}>Comment</Text>
-                <Text style={[styles.actionButton, { marginRight: 5 }]}>Like</Text>
-                <FontAwesome name="heart" size={16} color={liked ? 'red' : 'grey'} />
-
-
+                <Text style={[{ flex: 1 }, styles.actionBtns]}>Comment</Text>
+                <Text style={[styles.actionBtns, { marginRight: 5 }]}>
+                    Like
+                </Text>
+                <TouchableOpacity onPress={() => onLike(id)}>
+                    <FontAwesome
+                        name='heart'
+                        size={16}
+                        color={liked ? 'red' : 'grey'}
+                    />
+                </TouchableOpacity>
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
+    card: {
+        height: 250,
+        backgroundColor: 'white',
+        marginHorizontal: 30,
+        marginVertical: 30,
+        borderRadius: 20,
+        padding: 20,
+    },
     footer: {
         flexDirection: 'row',
         alignItems: 'center',
         flex: 1,
-        padding: 5
+        paddingTop: 10,
     },
-    card: {
-        backgroundColor: 'white',
-        height: 250,
-        marginHorizontal: 20,
-        borderRadius: 20,
-        marginVertical: 30,
-        padding: 20
+    actionBtns: {
+        fontSize: 16,
     },
-    actionButton: {
-        fontSize: 16
-    }
 });
+
+export default Card;
