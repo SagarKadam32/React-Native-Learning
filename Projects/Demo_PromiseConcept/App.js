@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
 
 const data = [{ author: 'Sagar', title: 'Book No. 1' },
@@ -7,30 +8,46 @@ const data = [{ author: 'Sagar', title: 'Book No. 1' },
 { author: 'Amar', title: 'Book No. 3' },
 { author: 'Akbar', title: 'Book No. 4' }];
 
-export default function App() {
+class App extends React.Component {
 
-  const dataProviderPromise = new Promise((resolve, reject) => {
-    let noIssues = true;
-    if (noIssues) {
-      setTimeout(() => resolve(data), 3000)
-    } else {
-      reject('Error Inside the promise.')
-    }
-  });
+  state = { data: [] };
 
-  dataProviderPromise
-    .then((res) => { console.log('Inside Then..'); console.log(res) })
-    .catch((err) => { console.log('Inside Catch'); console.log(err) })
+  componentDidMount() {
+    const dataProviderPromise = new Promise((resolve, reject) => {
+      let noIssues = true;
+      if (noIssues) {
+        setTimeout(() => resolve(data), 3000)
+      } else {
+        reject('Error Inside the promise.')
+      }
+    });
 
+    dataProviderPromise
+      .then((res) => {
+        console.log('Inside Then..');
+        console.log(res);
+        this.setState({ data: res });
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+      })
+      .catch((err) => {
+        console.log('Inside Catch');
+        console.log(err)
+      })
+  }
 
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.state.data.map((e1) => <View>
+          <Text>Title: {e1.title}</Text>
+          <Text>Author: {e1.author}</Text>
+          <Text>**********************</Text>
 
+        </View>)}
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -41,3 +58,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+export default App;
