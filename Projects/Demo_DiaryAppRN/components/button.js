@@ -1,5 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { theme } from "../constants/theme";
+
 
 
 export const Button = ({ title, style }) => {
@@ -16,8 +18,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 20,
         paddingBottom: 10,
+        borderTopWidth: 1,
+        borderColor: theme.primary_color_dark
     },
     title: {
-        fontSize: 24
+        fontSize: 18,
+        fontWeight: 'bold'
     }
 })
