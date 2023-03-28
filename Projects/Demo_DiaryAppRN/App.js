@@ -1,10 +1,34 @@
 import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
 import { Home } from './screens/home';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { theme } from "./constants/theme";
+
+
+const Stack = createNativeStackNavigator();
+
 
 export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <Home />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='Home'
+            component={Home}
+            options={{
+              title: 'Diary',
+              headerStyle: {
+                backgroundColor: theme.primary_color,
+              },
+              headerTintColor: 'black',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }
@@ -12,6 +36,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
-    backgroundColor: '#E1D5E7'
+    backgroundColor: theme.primary_color
   },
 });

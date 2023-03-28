@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from '../components/button';
 import { StyleSheet, View, Text } from 'react-native';
+import { theme } from "../constants/theme";
 
 
 export class Home extends React.Component {
@@ -9,7 +10,7 @@ export class Home extends React.Component {
             <View style={styles.content}>
                 <Text style={styles.placeholder}>No Diaries Yet!</Text>
             </View>
-            <Button title='Add a New Day' style={{ backgroundColor: '#E1D5E7' }} />
+            <Button title='Add a New Day' style={{ backgroundColor: theme.primary_color }} />
         </View>
     }
 }
