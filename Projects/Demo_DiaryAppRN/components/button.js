@@ -2,9 +2,9 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 
-export const Button = ({ title }) => {
+export const Button = ({ title, style }) => {
     return (
-        <TouchableOpacity style={styles.btn} activeOpacity={1} >
+        <TouchableOpacity style={[styles.btn, style]} >
             <Text style={styles.title}>{title}</Text>
         </TouchableOpacity >
     );
@@ -12,12 +12,10 @@ export const Button = ({ title }) => {
 
 const styles = StyleSheet.create({
     btn: {
-        backgroundColor: 'purple',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 20,
-        paddingBottom: 20
-
+        paddingBottom: 10,
     },
     title: {
         fontSize: 24

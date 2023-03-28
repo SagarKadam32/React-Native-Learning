@@ -9,7 +9,7 @@ export class Home extends React.Component {
             <View style={styles.content}>
                 <Text style={styles.placeholder}>No Diaries Yet!</Text>
             </View>
-            <Button title='Add a New Day' style={{ backgroundColor: 'purple' }} />
+            <Button title='Add a New Day' style={{ backgroundColor: '#E1D5E7' }} />
         </View>
     }
 }
