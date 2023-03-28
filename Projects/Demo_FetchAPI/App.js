@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import React from 'react';
 
