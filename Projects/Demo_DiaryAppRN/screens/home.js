@@ -17,7 +17,8 @@ export class Home extends React.Component {
                 <ListItem title='My Birthday' subTitle='28-03-2023' />
 
             </View>
-            <Button title='Add a New Day' style={{ backgroundColor: theme.primary_color }} />
+            <Button title='Add a New Day'
+                onPress={() => { this.props.navigation.navigate('addDiary') }} />
         </View >
     }
 }
