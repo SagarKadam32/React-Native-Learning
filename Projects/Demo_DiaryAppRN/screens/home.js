@@ -3,6 +3,8 @@ import { Button } from '../components/button';
 import { StyleSheet, View, ScrollView, RefreshControl, Text } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 
 export class Home extends React.Component {
@@ -13,7 +15,9 @@ export class Home extends React.Component {
     onRefresh = async () => {
         this.setState({ refreshing: true })
         const diary = await AsyncStorage.getItem('diary');
-        this.setState({ diary })
+        this.setState({ diary: JSON.parse(diary) })
+        this.setState({ refreshing: false })
+
 
     };
 
@@ -34,10 +38,6 @@ export class Home extends React.Component {
                     <Text style={styles.placeholder}>No Diaries Yet!</Text>  
                 </View>
                     }
-
-                
-
-
             </ScrollView>
             <Button title='Add a New Day'
                 onPress={() => { this.props.navigation.navigate('addDiary') }} />

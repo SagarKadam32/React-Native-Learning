@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button } from '../components/button';
-import { StyleSheet, View, Text, TextInput, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export const AddDiary = () => {
@@ -11,9 +12,8 @@ export const AddDiary = () => {
     const [body, setBody] = useState();
 
     const submit = () => {
-        console.log({ title, body })
-        const diary = { title, body }
-        AsyncStorage.setItem('diary', diary);
+    const diary = {title, body}
+    AsyncStorage.setItem('diary', JSON.stringify(diary));
     }
 
     console.log(title);
