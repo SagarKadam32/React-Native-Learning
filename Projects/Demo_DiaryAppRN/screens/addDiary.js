@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from '../components/button';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TextInput, AsyncStorage } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
 
 
-export class AddDiary extends React.Component {
-    render() {
-        return <View style={styles.container}>
-            <View style={[styles.group, { flex: 1 }]}>
-                <Text style={styles.label}>Title</Text>
-                <TextInput placeholder='Example' style={styles.title_input} />
+export const AddDiary = () => {
 
-                <Text style={styles.label}>Body</Text>
-                <TextInput placeholder='Example' style={[styles.title_input, { height: 300 }]} multiline />
-            </View>
-            <Button title='Submit' />
-        </View >
+    const [title, setTitle] = useState();
+    const [body, setBody] = useState();
+
+    const submit = () => {
+        console.log({ title, body })
+        const diary = { title, body }
+        AsyncStorage.setItem('diary', diary);
     }
+
+    console.log(title);
+    return <View style={styles.container}>
+        <View style={[styles.group, { flex: 1 }]}>
+            <Text style={styles.label}>Title</Text>
+            <TextInput placeholder='Example'
+                style={styles.title_input}
+                onChangeText={setTitle}
+                value={title} />
+
+            <Text style={styles.label}>Body</Text>
+            <TextInput placeholder='Example'
+                style={[styles.title_input, { height: 300 }]}
+                onChangeText={setBody}
+                value={body}
+                multiline />
+        </View>
+        <Button title='Submit'
+            onPress={submit} />
+    </View >
 }
+
 
 
 const styles = StyleSheet.create({

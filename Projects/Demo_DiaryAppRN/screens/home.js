@@ -1,25 +1,47 @@
 import React from "react";
 import { Button } from '../components/button';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, ScrollView, RefreshControl, Text } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
 
 
 export class Home extends React.Component {
+    state = {
+        refreshing: false
+    };
+
+    onRefresh = async () => {
+        this.setState({ refreshing: true })
+        const diary = await AsyncStorage.getItem('diary');
+        this.setState({ diary })
+
+    };
+
     render() {
         return <View style={styles.home}>
             {/* <View style={styles.placeholder_container}>
                <Text style={styles.placeholder}>No Diaries Yet!</Text>  
             </View> */}
-            <View style={styles.body}>
-                <ListItem title='Day to Remember' subTitle='28-03-2023' style={{ borderTopWidth: 1 }} />
-                <ListItem title='Lake Day' subTitle='28-03-2023' />
-                <ListItem title='My Birthday' subTitle='28-03-2023' />
+            <ScrollView style={styles.body}
+                refreshControl={
+                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />}>
 
-            </View>
+                    {this.state.diary ?(
+                <ListItem title={this.state.diary.title}
+                subTitle='28-03-2023'
+                style={{ borderTopWidth: 1 }} />): 
+                <View style={styles.placeholder_container}>
+                    <Text style={styles.placeholder}>No Diaries Yet!</Text>  
+                </View>
+                    }
+
+                
+
+
+            </ScrollView>
             <Button title='Add a New Day'
                 onPress={() => { this.props.navigation.navigate('addDiary') }} />
-        </View >
+        </View>
     }
 }
 
