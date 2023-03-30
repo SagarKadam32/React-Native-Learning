@@ -6,18 +6,21 @@ import { ListItem } from "../components/listItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-export const AddDiary = ({navigation}) => {
+export const AddDiary = ({ navigation }) => {
 
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
 
     const submit = async () => {
-    const diary = {title, body}
-    await AsyncStorage.setItem('diary', JSON.stringify(diary));
-    navigation.goBack();
+        const created = new Date().getTime();
+        const diary = { title, body, created };
+        const all_items = await AsyncStorage.getItem('diaries') || '[]';
+        const parse_items = JSON.parse(all_items);
+        const updated_diaries = JSON.stringify([...parse_items, diary]);
+        await AsyncStorage.setItem('diaries', updated_diaries);
+        navigation.goBack();
     }
 
-    console.log(title);
     return <View style={styles.container}>
         <View style={[styles.group, { flex: 1 }]}>
             <Text style={styles.label}>Title</Text>

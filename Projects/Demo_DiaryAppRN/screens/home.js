@@ -9,36 +9,45 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class Home extends React.Component {
     state = {
-        refreshing: false
+        refreshing: false,
+        diaries: []
     };
 
     onRefresh = async () => {
         this.setState({ refreshing: true })
-        const diary = await AsyncStorage.getItem('diary');
-        this.setState({ diary: JSON.parse(diary) })
+        const diaries = await AsyncStorage.getItem('diaries');
+        this.setState({ diaries: JSON.parse(diaries) })
         this.setState({ refreshing: false })
 
 
     };
 
     render() {
+        const { diaries } = this.state
+
         return <View style={styles.home}>
-            {/* <View style={styles.placeholder_container}>
-               <Text style={styles.placeholder}>No Diaries Yet!</Text>  
-            </View> */}
             <ScrollView style={styles.body}
                 refreshControl={
                     <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />}>
-
-                    {this.state.diary ?(
-                <ListItem title={this.state.diary.title}
-                subTitle='28-03-2023'
-                style={{ borderTopWidth: 1 }} />): 
-                <View style={styles.placeholder_container}>
-                    <Text style={styles.placeholder}>No Diaries Yet!</Text>  
-                </View>
-                    }
+                {diaries.length ? (
+                    diaries.map((diary, index) => {
+                        return (
+                            <ListItem
+                                title={diary.title}
+                                subtitle={new Date(diary.created).toDateString()}
+                                style={{ borderTopWidth: 1 }}
+                                key={diary.created + index + diary.title}
+                                onPress={() => this.itemPressedHandler(diary)}
+                            />
+                        );
+                    })
+                ) : (
+                    <View style={styles.placeholdere_container}>
+                        <Text style={styles.placeholder}>No Diaries Yet!</Text>
+                    </View>
+                )}
             </ScrollView>
+
             <Button title='Add a New Day'
                 onPress={() => { this.props.navigation.navigate('addDiary') }} />
         </View>
