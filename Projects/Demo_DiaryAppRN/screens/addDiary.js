@@ -3,7 +3,7 @@ import { Button } from '../components/button';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Storage } from '../utils/storage';
 
 
 export const AddDiary = ({ navigation }) => {
@@ -14,10 +14,9 @@ export const AddDiary = ({ navigation }) => {
     const submit = async () => {
         const created = new Date().getTime();
         const diary = { title, body, created };
-        const all_items = await AsyncStorage.getItem('diaries') || '[]';
-        const parse_items = JSON.parse(all_items);
-        const updated_diaries = JSON.stringify([...parse_items, diary]);
-        await AsyncStorage.setItem('diaries', updated_diaries);
+        const all_items = (await Storage.getItem('diaries')) || [];
+        const updated_diaries = [...all_items, diary];
+        await Storage.setItem('diaries', updated_diaries);
         navigation.goBack();
     }
 

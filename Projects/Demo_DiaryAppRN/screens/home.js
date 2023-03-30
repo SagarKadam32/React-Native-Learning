@@ -3,8 +3,7 @@ import { Button } from '../components/button';
 import { StyleSheet, View, ScrollView, RefreshControl, Text } from 'react-native';
 import { theme } from "../constants/theme";
 import { ListItem } from "../components/listItem";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { Storage } from '../utils/storage';
 
 
 export class Home extends React.Component {
@@ -15,8 +14,8 @@ export class Home extends React.Component {
 
     onRefresh = async () => {
         this.setState({ refreshing: true })
-        const diaries = await AsyncStorage.getItem('diaries');
-        this.setState({ diaries: JSON.parse(diaries) })
+        const diaries = (await Storage.getItem('diaries')) || [];
+        this.setState({ diaries });
         this.setState({ refreshing: false })
 
 
