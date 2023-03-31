@@ -17,9 +17,18 @@ export class Home extends React.Component {
         const diaries = (await Storage.getItem('diaries')) || [];
         this.setState({ diaries });
         this.setState({ refreshing: false })
-
-
     };
+
+    addDiaryHandler = (diary) =>
+        this.setState((prevState) => ({
+            diaries: [...prevState.diaries, diary],
+        }));
+
+    itemPressedHandler = () => {
+        this.props.navigation.navigate('Diary', {
+            diary,
+        });
+    }
 
     render() {
         const { diaries } = this.state
@@ -47,8 +56,14 @@ export class Home extends React.Component {
                 )}
             </ScrollView>
 
-            <Button title='Add a New Day'
-                onPress={() => { this.props.navigation.navigate('addDiary') }} />
+            <Button
+                title='Add a New Day'
+                onPress={() => {
+                    this.props.navigation.navigate('addDiary', {
+                        addDiaryHandler: this.addDiaryHandler,
+                    });
+                }}
+            />
         </View>
     }
 }
